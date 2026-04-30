@@ -1,6 +1,5 @@
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
-const API_URL = 'http://localhost:3001';
-// When deployed replace with: 'https://your-app.onrender.com'
+const API_URL = 'https://moodbeat-rc9m.onrender.com';// When deployed replace with: 'https://your-app.onrender.com'
 
 // ─── State ────────────────────────────────────────────────────────────────────
 let selectedMood = null;
