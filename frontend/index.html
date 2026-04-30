@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MoodBeats 🎵</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">Mood<span>Beats</span></div>
+      <p class="tagline">Tell us how you feel. We'll find your song.</p>
+      <div class="streak-bar" id="streakBar" style="display:none">
+        🔥 <span id="streakCount">1</span> day streak — keep it up!
+      </div>
+    </header>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="tab active" id="tab-quick"   onclick="switchTab('quick')">⚡ Quick Mood</button>
+      <button class="tab"        id="tab-journal" onclick="switchTab('journal')">✍️ Journal</button>
+      <button class="tab"        id="tab-history" onclick="switchTab('history')">📖 My Journal</button>
+    </div>
+
+    <!-- Quick Mood Panel -->
+    <div class="panel" id="panel-quick">
+      <p class="panel-hint">How are you feeling right now?</p>
+      <div class="mood-grid">
+        <button class="mood-btn" data-mood="happy"       onclick="selectMood(this)">😊<span>Happy</span></button>
+        <button class="mood-btn" data-mood="sad"         onclick="selectMood(this)">😢<span>Sad</span></button>
+        <button class="mood-btn" data-mood="angry"       onclick="selectMood(this)">😤<span>Angry</span></button>
+        <button class="mood-btn" data-mood="anxious"     onclick="selectMood(this)">😰<span>Anxious</span></button>
+        <button class="mood-btn" data-mood="motivated"   onclick="selectMood(this)">🔥<span>Motivated</span></button>
+        <button class="mood-btn" data-mood="chill"       onclick="selectMood(this)">😌<span>Chill</span></button>
+        <button class="mood-btn" data-mood="focused"     onclick="selectMood(this)">🎯<span>Focused</span></button>
+        <button class="mood-btn" data-mood="heartbroken" onclick="selectMood(this)">💔<span>Heartbroken</span></button>
+        <button class="mood-btn" data-mood="tired"       onclick="selectMood(this)">😴<span>Tired</span></button>
+      </div>
+      <button class="cta-btn" id="btn-quick" onclick="submitQuick()" disabled>Get My Playlist →</button>
+    </div>
+
+    <!-- Journal Panel -->
+    <div class="panel hidden" id="panel-journal">
+      <p class="panel-hint">Write about your day — AI will read your emotions and save your entry.</p>
+      <textarea id="journal-text" placeholder="e.g. Had a rough exam today, didn't sleep well but feeling relieved it's finally over..." rows="5"></textarea>
+      <button class="cta-btn" onclick="submitJournal()">Analyze & Play →</button>
+    </div>
+
+    <!-- History Panel -->
+    <div class="panel hidden" id="panel-history">
+      <p class="panel-hint">Your past journal entries — fetched live from IBM Cloudant.</p>
+      <div id="history-list">
+        <div class="history-loading">Loading your entries...</div>
+      </div>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader hidden" id="loader">
+      <div class="spinner"></div>
+      <p id="loader-text">Analyzing your mood...</p>
+    </div>
+
+    <!-- Results -->
+    <div class="results hidden" id="results">
+
+      <div class="mood-result">
+        <div class="mood-label" id="mood-label">😊 Happy</div>
+        <p class="mood-message" id="mood-message"></p>
+        <div class="tone-bars" id="tone-bars"></div>
+      </div>
+
+      <!-- Talk button — right after mood card -->
+      <button class="talk-btn" id="talkBtn" onclick="openChat()">💬 Talk about it — I'm here to listen</button>
+
+      <!-- Chat Section -->
+      <div class="chat-section" id="chatSection" style="display:none">
+        <div class="chat-header">
+          <span class="chat-title">💬 Talk about it</span>
+          <span class="chat-subtitle">I'm here to listen</span>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-row">
+          <input
+            type="text"
+            id="chatInput"
+            class="chat-input"
+            placeholder="Type something..."
+            onkeydown="if(event.key==='Enter') sendChat()"
+          />
+          <button class="chat-send-btn" onclick="sendChat()">Send</button>
+        </div>
+      </div>
+
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-english" onclick="switchLang('english')">🇬🇧 English</button>
+        <button class="lang-btn"        id="btn-hindi"   onclick="switchLang('hindi')">🇮🇳 Hindi</button>
+      </div>
+
+      <h2 class="songs-title">Your Playlist</h2>
+      <div class="song-list" id="song-list"></div>
+
+      <button class="reset-btn" onclick="reset()">↩ Try Again</button>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
