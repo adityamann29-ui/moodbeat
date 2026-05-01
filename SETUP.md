@@ -124,27 +124,3 @@ const API_URL = 'https://moodbeats-backend.onrender.com';
 6. Vercel gives you a live URL like: `https://moodbeats.vercel.app`
 
 That's your shareable link. Done!
-
----
-
-## What to say to judges
-
-"The frontend is plain HTML/CSS/JS deployed on Vercel.
-The backend is Node.js with Express, deployed on Render.
-When a user types how they feel, the backend calls IBM Watson Tone Analyzer —
-a cloud AI service — which returns emotion scores.
-We map those scores to songs and return YouTube links.
-Each entry is saved to IBM Cloudant, which is IBM's cloud NoSQL database.
-Everything is deployed, live, and accessible from any browser."
-
----
-
-## Common errors
-
-| Error | Fix |
-|-------|-----|
-| `401 Unauthorized` from Watson | Wrong API key — re-check WATSON_API_KEY |
-| `CORS error` in browser | Make sure CORS is enabled in server.js (it is by default) |
-| `Cannot reach server` | Your Render URL in script.js might have a typo |
-| Render app slow first load | Normal — free tier sleeps after 15 min. First request wakes it up in ~30 sec |
-| Watson URL error | Make sure WATSON_URL has no trailing slash |
